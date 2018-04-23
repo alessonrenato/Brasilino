@@ -79,7 +79,7 @@
 /* funcoes de ajuda para paraCada*/
 
 /* paraCada_COMP
-   Checa se o valor de indice e maior que o compriento do array.
+   Checa se o valor de indice e maior que o comprimento do array.
  */
 
 #define paraCada_COMP(INDEX, ARRAY, ARRAY_TYPE, SIZE) \
@@ -110,7 +110,7 @@
   })
 
 /* paraCada
-   Aqui é onde a magia acontece :)
+   Aqui e onde a magia acontece :)
    'b' = garante o fim do laco
  */
 
