@@ -69,12 +69,13 @@
 #define esperarMili(tempo) delay(tempo)
 
 //-------------paraCada(foreach)---------------
-#define CONCAT(a,b) CONCAT_(a,b) //concatena
+//concatena
+#define CONCAT(a,b) CONCAT_(a,b) 
 #define CONCAT_(a,b) a ## b
 
 /* Higiene nos macros */
-#define GENSYM(name) \ // funcao auxiliar de limpeza
-  CONCAT(CONCAT(CONCAT(_anon_variable_, name),__LINE__),__COUNTER__)
+#define GENSYM(name) \
+    CONCAT(CONCAT(CONCAT(_anon_variable_, name),__LINE__),__COUNTER__)
 
 /* funcoes de ajuda para paraCada*/
 
