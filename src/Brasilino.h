@@ -68,7 +68,7 @@
 #define esperar(tempo) delay(tempo*1000)
 #define esperarMili(tempo) delay(tempo)
 
-//------PARACADA(FOREACH)------
+//------PARACADA(paraCada)------
 #define CONCAT(a,b) CONCAT_(a,b)
 #define CONCAT_(a,b) a ## b
 
@@ -78,13 +78,13 @@
 
 /* Helper functions for foreach */
 
-/* FOREACH_COMP
+/* paraCada_COMP
    Checks if the value of INDEX, is greater than the length of ARRAY.
  */
 
-#define FOREACH_COMP(INDEX, ARRAY, ARRAY_TYPE, SIZE) \
-  FOREACH_COMP_ (INDEX, ARRAY, ARRAY_TYPE, SIZE, GENSYM (ret))
-#define FOREACH_COMP_(INDEX, ARRAY, ARRAY_TYPE, SIZE, ret) \
+#define paraCada_COMP(INDEX, ARRAY, ARRAY_TYPE, SIZE) \
+  paraCada_COMP_ (INDEX, ARRAY, ARRAY_TYPE, SIZE, GENSYM (ret))
+#define paraCada_COMP_(INDEX, ARRAY, ARRAY_TYPE, SIZE, ret) \
   __extension__ \
   ({ \
     bool ret = 0; \
@@ -95,14 +95,14 @@
     ret; \
   })
 
-/* FOREACH_ELEM
+/* paraCada_ELEM
    Return a pointer to the element at INDEX in ARRAY.
  */
 
-#define FOREACH_ELEM(INDEX, ARRAY, TYPE) \
-  FOREACH_ELEM_ (INDEX, ARRAY, TYPE, GENSYM (tmp_array))
+#define paraCada_ELEM(INDEX, ARRAY, TYPE) \
+  paraCada_ELEM_ (INDEX, ARRAY, TYPE, GENSYM (tmp_array))
 
-#define FOREACH_ELEM_(INDEX, ARRAY, TYPE, tmp_array) \
+#define paraCada_ELEM_(INDEX, ARRAY, TYPE, tmp_array) \
   __extension__ \
   ({ \
     TYPE *tmp_array_ = ARRAY; \
@@ -111,23 +111,23 @@
 
 /* Foreach loop itself */
 
-/* FOREACH
+/* paraCada
    A for-each loop implemented in GNU C.
-   The variable b at the end of FOREACH is there to make sure that the final
+   The variable b at the end of paraCada is there to make sure that the final
    for loop eventually terminates.
  */
 
-#define FOREACH(VAR, ARRAY) \
-  FOREACH_ (VAR, ARRAY, GENSYM (array), GENSYM (i), GENSYM (b))
+#define paraCada(VAR, ARRAY) \
+  paraCada_ (VAR, ARRAY, GENSYM (array), GENSYM (i), GENSYM (b))
 
-#define FOREACH_(VAR, ARRAY, array, i, b) \
+#define paraCada_(VAR, ARRAY, array, i, b) \
 for (void *array = (void*)(ARRAY); array; array = 0) \
-for (size_t i = 0; array && FOREACH_COMP (i, array, \
+for (size_t i = 0; array && paraCada_COMP (i, array, \
                               __typeof__ (ARRAY), \
                               sizeof (ARRAY) / sizeof ((ARRAY)[0])); \
                               i++) \
 for (bool b = 1; b; (b) ? array = 0 : 0, b = 0) \
-for (VAR = FOREACH_ELEM (i, array, __typeof__ ((ARRAY)[0])); b; b = 0)
+for (VAR = paraCada_ELEM (i, array, __typeof__ ((ARRAY)[0])); b; b = 0)
 
 
 //------------------Funções de Comando---------------------
