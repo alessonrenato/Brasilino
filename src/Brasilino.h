@@ -68,18 +68,18 @@
 #define esperar(tempo) delay(tempo*1000)
 #define esperarMili(tempo) delay(tempo)
 
-//------PARACADA(paraCada)------
-#define CONCAT(a,b) CONCAT_(a,b)
+//-------------paraCada(foreach)---------------
+#define CONCAT(a,b) CONCAT_(a,b) //concatena
 #define CONCAT_(a,b) a ## b
 
-/* Hygiene in macros */
-#define GENSYM(name) \
+/* Higiene nos macros */
+#define GENSYM(name) \ // funcao auxiliar de limpeza
   CONCAT(CONCAT(CONCAT(_anon_variable_, name),__LINE__),__COUNTER__)
 
-/* Helper functions for foreach */
+/* funcoes de ajuda para paraCada*/
 
 /* paraCada_COMP
-   Checks if the value of INDEX, is greater than the length of ARRAY.
+   Checa se o valor de indice e maior que o compriento do array.
  */
 
 #define paraCada_COMP(INDEX, ARRAY, ARRAY_TYPE, SIZE) \
@@ -96,7 +96,7 @@
   })
 
 /* paraCada_ELEM
-   Return a pointer to the element at INDEX in ARRAY.
+   Retorna um ponteiro ao elemento no indice do array.
  */
 
 #define paraCada_ELEM(INDEX, ARRAY, TYPE) \
@@ -109,12 +109,9 @@
     &tmp_array_[INDEX]; \
   })
 
-/* Foreach loop itself */
-
 /* paraCada
-   A for-each loop implemented in GNU C.
-   The variable b at the end of paraCada is there to make sure that the final
-   for loop eventually terminates.
+   Aqui é onde a magia acontece :)
+   'b' = garante o fim do laco
  */
 
 #define paraCada(VAR, ARRAY) \
